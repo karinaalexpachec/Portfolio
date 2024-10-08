@@ -1,73 +1,133 @@
-<!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Someone's portfolio</title>
-
- <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-
-    <link href="./styling.css" rel="stylesheet">
-
-
-
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Website</title>
+    <link rel="stylesheet" href="styling2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
-
-        
-
-        
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <div id="navbar">
-    <a id="navbar-title" href="./index.html">Karina Barroso</a>
-    
-    <div class="navbar-links">
-    <a href="./aboutme.html">About me</a>
-    <a href="./projects.html">Projects</a>
-    <a href="./contacts.html">Contacts</a>
-    
-    
-        </div>
-
-    </div>
-    
-    <h1 id="big-banner">
-        My Portfolio!
-     </h1>
-
-     <section id="projects">
-        <h2>Projects</h2>
-        <div id="projects-grid">
-            <div class ="card">
-            <img src="./station.png">
-                <h3>Amazing mobile workstation</h3>
-                <p>This is a showergel bottle product aimed for women,
-                    and the following is a sketch made during the 
-                    ideation process.
-                </p>
-                </div>
-
-        </div>
+    <main>
+        <section class="hero">
+            <img src="./Image/main.png" alt="Portfolio Image" class="hero-image">
+            <div class="container">
+                <h1>Welcome To My Portfolio</h1>
+                <a href="#" class="cta-button">Go To Projects</a>
+            </div>
         </section>
 
+        <section class="about container">
+            <h2>About Me</h2>
+            <p>I'm a Global Design student at IADE creative university, originally from Angola. For six years, 
+               I took the IB and DP design courses. Throughout these years, I sketched and designed products
+               digitally, engaging in product design and prototyping. Eager to further develop my design 
+               skills with real-life applications and considerations, I chose to apply to the Global Design course at
+               IADE. This has further fueled my passion for design and aspiration for a future career
+               as a designer.</p>
+        </section>
+
+       
+
+       
 
 
-    
-   
+        
+        <section id="contact" class="contact container">
+            <h2>CONTACT ME</h2>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <input type="text" id="firstName" name="firstName" placeholder="First Name *" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="lastName" name="lastName" placeholder="Last Name *" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Email *" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Message *" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Send</button>
+                </form>
+            </div>
 
- 
+            <!-- Email Display -->
+            <div class="contact-info">
+                <p>Email: karinaapbarroso@gmail.com</p>
+            </div>
+
+            <!-- Live Chat Section -->
+            <div class="live-chat">
+                <button id="chat-button" class="chat-button">Start Live Chat</button>
+                <div id="chat-window" class="chat-window hidden">
+                    <div class="chat-header">
+                        <h3>Live Chat</h3>
+                        <button id="close-chat">X</button>
+                    </div>
+                    <div id="chat-messages" class="chat-messages"></div>
+                    <input type="text" id="chat-input" placeholder="Type your message...">
+                    <button id="send-message">Send</button>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Live Chat -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatButton = document.getElementById('chat-button');
+            const chatWindow = document.getElementById('chat-window');
+            const closeChat = document.getElementById('close-chat');
+            const chatInput = document.getElementById('chat-input');
+            const sendMessage = document.getElementById('send-message');
+            const chatMessages = document.getElementById('chat-messages');
+
+            chatButton.addEventListener('click', () => {
+                chatWindow.classList.toggle('hidden');
+                chatInput.focus();
+            });
+
+            closeChat.addEventListener('click', () => {
+                chatWindow.classList.add('hidden');
+            });
+
+            sendMessage.addEventListener('click', () => {
+                const message = chatInput.value.trim();
+                if (message) {
+                    const messageElement = document.createElement('p');
+                    messageElement.textContent = `You: ${message}`;
+                    chatMessages.appendChild(messageElement);
+                    chatInput.value = '';
+                }
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            });
+
+             // Optional to send message on Enter key
+             chatInput.addEventListener('keypress', function(event) {
+                 if (event.key === 'Enter') {
+                     sendMessage.click();
+                 }
+             });
+        });
+    </script>
+
 </body>
-
-   
-
-
-
-
-
-    </body>
-
 </html>
