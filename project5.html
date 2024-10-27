@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Projects</title>
+    <link rel="stylesheet" href="styling2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        .main-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px 15px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        .arrow:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
+        .thumbnail-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .thumbnail {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            margin: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .thumbnail:hover, .thumbnail.active {
+            border-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="project-page">
+        <a href="academic-projects.html" class="back-button">&larr; Back </a>
+
+        <h1>"FANZINE"</h1>
+
+        <div class="project-content">
+            <!-- Project Description Box -->
+            <div class="project-description box-background">
+                <p>The following project was a collaboration with colleagus, to develope a "Fanzine". 
+                    The "Fanzine", had to be about a famous designer of our choice, and express who 
+                    said designer was, in a creative way. This product was designed using, Adobe illustrator.</p>
+            </div>
+
+            <!-- Image Gallery -->
+            <div class="gallery-container">
+                <img src="./Image/LesterBeall.png" alt="Zerza Crafts" class="main-image" id="mainImage">
+                <button class="arrow prev" onclick="changeImage(-1)">&#10094;</button>
+                <button class="arrow next" onclick="changeImage(1)">&#10095;</button>
+                <div class="thumbnail-container" id="thumbnailContainer"></div>
+            </div>
+        </div>
+
+          <!-- Other Projects Section -->
+          <div class="other-projects-container">
+            <div class="other-projects">
+                <h2>Other Projects</h2>
+                <div class="project-gallery">
+                    <a href="project1.html" class="project-item">
+                        <img src="./Image/workstation12.png" alt="Project 1">
+                        <h3>"Workstation Design"</h3>
+                    </a>
+                    <a href="project2.html" class="project-item">
+                        <img src="./Image/photography.png" alt="Project 2">
+                        <h3>"Photography Lab"</h3>
+                    </a>
+
+                    <a href="project2.html" class="project-item">
+                        <img src="./Image/mapping.png" alt="Project 2">
+                        <h3>"Video-Mapping"</h3>
+                    </a>
+                    <a href="project2.html" class="project-item">
+                        <img src="./Image/vogue2.png" alt="Project 2">
+                        <h3>"VOGUE Collaboration"</h3>
+                    </a>
+
+                    
+                    <!-- Add more project items as needed -->
+                </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const images = [
+            "./Image/f1.png",
+            "./Image/f2.png",
+            "./Image/f3.png",
+            "./Image/f4.png",
+            "./Image/f5.png"
+        ];
+
+        let currentIndex = 0;
+        const mainImage = document.getElementById('mainImage');
+        const thumbnailContainer = document.getElementById('thumbnailContainer');
+
+        function changeImage(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            } else if (currentIndex >= images.length) {
+                currentIndex = 0;
+            }
+            updateMainImage();
+        }
+
+        function updateMainImage() {
+            mainImage.src = images[currentIndex];
+            updateActiveThumbnail();
+        }
+
+        function updateActiveThumbnail() {
+            const thumbnails = thumbnailContainer.getElementsByClassName('thumbnail');
+            for (let i = 0; i < thumbnails.length; i++) {
+                thumbnails[i].classList.remove('active');
+            }
+            thumbnails[currentIndex].classList.add('active');
+        }
+
+        // Create thumbnails
+        images.forEach((img, index) => {
+            const thumbnail = document.createElement('img');
+            thumbnail.src = img;
+            thumbnail.alt = `Thumbnail ${index + 1}`;
+            thumbnail.classList.add('thumbnail');
+            if (index === 0) thumbnail.classList.add('active');
+            thumbnail.onclick = () => {
+                currentIndex = index;
+                updateMainImage();
+            };
+            thumbnailContainer.appendChild(thumbnail);
+        });
+    </script>
+</body>
+</html>
