@@ -17,6 +17,7 @@
             width: 100%;
             height: auto;
             border-radius: 8px;
+            cursor: pointer; /* Change cursor to pointer for clickability */
         }
         .arrow {
             position: absolute;
@@ -56,6 +57,16 @@
         .thumbnail:hover, .thumbnail.active {
             border-color: #007bff;
         }
+        /* Enlarged image styles */
+        .enlarged {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90vh;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
@@ -78,9 +89,9 @@
         <div class="project-content">
             <!-- Project Description Box -->
             <div class="project-description box-background">
-                <p>The following project was a collaboration with colleagus, to develope a "Fanzine". 
+                <p>The following project was a collaboration with colleagues, to develop a "Fanzine". 
                     The "Fanzine", had to be about a famous designer of our choice, and express who 
-                    said designer was, in a creative way. This product was designed using, Adobe illustrator.</p>
+                    said designer was, in a creative way. This product was designed using Adobe Illustrator.</p>
             </div>
 
             <!-- Image Gallery -->
@@ -94,36 +105,39 @@
 
           <!-- Other Projects Section -->
           <div class="other-projects-container">
-            <div class="other-projects">
-                <h2>Other Projects</h2>
-                <div class="project-gallery">
-                    <a href="project3.html" class="project-item">
-                        <img src="./Image/workstation12.png" alt="Project 1">
-                        <h3>"Workstation Design"</h3>
-                    </a>
-                    <a href="project6.html" class="project-item">
-                        <img src="./Image/photography.png" alt="Project 2">
-                        <h3>"Photography Lab"</h3>
-                    </a>
+              <div class="other-projects">
+                  <h2>Other Projects</h2>
+                  <div class="project-gallery">
+                      <a href="project3.html" class="project-item">
+                          <img src="./Image/workstation12.png" alt="Project 1">
+                          <h3>"Workstation Design"</h3>
+                      </a>
+                      <a href="project6.html" class="project-item">
+                          <img src="./Image/photography.png" alt="Project 2">
+                          <h3>"Photography Lab"</h3>
+                      </a>
 
-                    <a href="project7.html" class="project-item">
-                        <img src="./Image/mapping.png" alt="Project 2">
-                        <h3>"Video-Mapping"</h3>
-                    </a>
-                    <a href="project1.html" class="project-item">
-                        <img src="./Image/vogue2.png" alt="Project 2">
-                        <h3>"VOGUE Collaboration"</h3>
-                    </a>
+                      <a href="project7.html" class="project-item">
+                          <img src="./Image/mapping.png" alt="Project 2">
+                          <h3>"Video-Mapping"</h3>
+                      </a>
+                      <a href="project1.html" class="project-item">
+                          <img src="./Image/vogue2.png" alt="Project 2">
+                          <h3>"VOGUE Collaboration"</h3>
+                      </a>
 
-                    
-                    <!-- Add more project items as needed -->
-                </div>
+                      <!-- Add more project items as needed -->
+                  </div>
+              </div>
+          </div>
+
     </main>
 
     <footer>
         <p>&copy; 2024 Your Name. All rights reserved.</p>
     </footer>
 
+    <!-- JavaScript -->
     <script>
         const images = [
             "./Image/f1.png",
@@ -166,13 +180,29 @@
             thumbnail.src = img;
             thumbnail.alt = `Thumbnail ${index + 1}`;
             thumbnail.classList.add('thumbnail');
-            if (index === 0) thumbnail.classList.add('active');
-            thumbnail.onclick = () => {
-                currentIndex = index;
-                updateMainImage();
-            };
-            thumbnailContainer.appendChild(thumbnail);
-        });
+            
+			// Add click event to each thumbnail
+			thumbnail.onclick = () => {
+				currentIndex = index;
+				updateMainImage();
+			};
+
+			if (index === 0) thumbnail.classList.add('active');
+			thumbnailContainer.appendChild(thumbnail);
+		});
+
+		// Add click event to main image for enlarging
+		mainImage.addEventListener('click', function() {
+			this.classList.toggle('enlarged');
+		});
+
+		// Close enlarged image when clicking outside
+		document.addEventListener('click', function(event) {
+			if (!event.target.closest('.gallery-container')) {
+				mainImage.classList.remove('enlarged');
+			}
+		});
     </script>
+
 </body>
 </html>
