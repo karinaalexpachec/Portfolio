@@ -453,4 +453,8 @@ h2 {
     margin-bottom: 1rem; /* Space below the title */
 }
 
-
+.hero video {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
